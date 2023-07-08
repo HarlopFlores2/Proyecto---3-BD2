@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reconocimiento facial</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <center>
+        <h1 class="mt-5 mb-5">Reconocimiento facial</h1>
+        </center>
+        <form id="upload-form">
+            <div class="form-group">
+                <label for="file">Seleccionar archivo</label>
+                <input type="file" class="form-control-file" id="file" name="file" required>
+            </div>
+            <div class="form-group">
+                <label for="k">Número de resultados</label>
+                <input type="number" class="form-control" id="k" name="k" required min="1">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div id="loading" class="mt-5" style="display: none;"><h2>Cargando...</h2></div>
+        <div id="result" class="mt-5"></div>
+    </div>
+    <script src="/static/main.js"></script>
+</body>
+</html>
