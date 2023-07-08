@@ -2,6 +2,7 @@ import pickle
 import face_recognition
 import numpy as np
 import heapq
+import time
 
 class SequentialQuery:
     def __init__(self):
@@ -22,6 +23,8 @@ class SequentialQuery:
             return []
         
     def knn_query(self, image_path, k):
+        start_time = time.time()
+
         image = face_recognition.load_image_file(image_path)
         image_encoding = face_recognition.face_encodings(image)
         if len(image_encoding) > 0:
@@ -33,6 +36,10 @@ class SequentialQuery:
                     heapq.heappush(result, (-distance, key))
                 else:
                     heapq.heappushpop(result, (-distance, key))
-            return [key for _, key in sorted(result)]
+            result = [key for _, key in sorted(result)]
         else:
-            return []
+            result = []
+
+        execution_time = time.time() - start_time
+
+        return result, execution_time

@@ -1,6 +1,7 @@
 from rtree import index
 import face_recognition
 import pickle
+import time
 
 class RtreeQuery:
     def __init__(self, m):
@@ -16,12 +17,18 @@ class RtreeQuery:
             self.index.insert(i, self.dict_encoding[key], obj=key)
 
     def knn_query(self, image_path, k):
+        start_time = time.time()
+
         image = face_recognition.load_image_file(image_path)
         image_encoding = face_recognition.face_encodings(image)
         if len(image_encoding) > 0:
             image_encoding = image_encoding[0]
             nearest = self.index.nearest(image_encoding, k, objects=True)
-            return [obj.object for obj in nearest]
+            result = [obj.object for obj in nearest]
         else:
-            return []
+            result = []
+
+        execution_time = time.time() - start_time
+
+        return result, execution_time
         
