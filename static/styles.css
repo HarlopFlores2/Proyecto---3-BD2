@@ -1,26 +1,54 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.jumbotron {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
 }
 
 #upload-form {
-    margin-bottom: 2em;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
 }
 
 #result {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 1em;
+    width: 100%;
 }
 
 #result img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
+    margin-bottom: 1em;
 }
 
 .result-section {
-    text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
 }
 
-.result-section h2 {
+.section-title {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.item-wrapper {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.result-section h4 {
     margin-bottom: 1em;
+    color: #6c757d;
+}
+
+#loading h2 {
+    color: #6c757d;
 }

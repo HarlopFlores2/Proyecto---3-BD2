@@ -3,6 +3,7 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import RtreeQuery
 import SequentialQuery
+import KDTree
 import os
 
 app = Flask(__name__, static_folder='static')
@@ -21,20 +22,27 @@ def query():
     filepath = os.path.join('images', filename)
     file.save(filepath)
     
-    rtree_query = RtreeQuery.RtreeQuery(100)
+    rtree_query = RtreeQuery.RtreeQuery('./dict_encoding.pickle')
     result_rtree, time_rtree = rtree_query.knn_query(filepath, k)
     result_rtree = [path.replace('/mnt/c/proyecto3-bd2/', '/') for path in result_rtree]
     
-    sequential_query = SequentialQuery.SequentialQuery()
+    sequential_query = SequentialQuery.SequentialQuery('./dict_encoding.pickle')
     result_sequential, time_sequential = sequential_query.knn_query(filepath, k)
     result_sequential = [path.replace('/mnt/c/proyecto3-bd2/', '/') for path in result_sequential]
-    
+
+    kdtree_query = KDTree.KDTree('./dict_encoding.pickle')
+    distances, result_kdtree, time_kdtree = kdtree_query.knn_query(filepath, k)
+    result_kdtree = [path.replace('/mnt/c/proyecto3-bd2/', '/') for path in result_kdtree]
+
     return jsonify({
         "result_rtree": result_rtree, 
         "result_sequential": result_sequential, 
+        "result_kdtree": result_kdtree,
         "time_rtree": time_rtree,
         "time_sequential": time_sequential,
+        "time_kdtree": time_kdtree,
     })
+
 
 
 @app.route('/lfw/<path:filename>')
