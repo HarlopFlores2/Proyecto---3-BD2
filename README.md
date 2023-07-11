@@ -44,10 +44,26 @@ Es una estructura de datos utilizada para buscar y organizar conjuntos de datos 
 
 ## Experimentación
 
+Para analizar el desempeño de las técnicas empleadas, se hizo un experimento para los 3 KNN implementados, variando el tamaño de la colección de objetos y 
+manteniendo constante el objeto de consulta y el valor de K.
 
+Tamaño | KNN-Secuencial | KNN-RTree | KNN-HighD 
+------------ | ------------- | ------------- | -------------
+N=100 | 0.997 ms | 0.0 ms         | 0.0 ms
+N=200 | 0.997 ms | 0.996 ms       | 0.0 ms
+N=400 | 1.020 ms | 0.997 ms       | 0.0 ms
+N=800 | 2.992 ms | 1.994 ms       | 0.997 ms
+N=1600 | 3.986 ms | 3.976 ms     | 0.997 ms
+N=3200 | 9.972 ms | 7.980 ms     | 0.998 ms
+N=6400 | 20.944 ms | 16.955 ms    | 1.995 ms
+N=12800 | 42.886 ms | 38.895 ms   | 4.987 ms
 
+\* Valor de K = 8
 
+Estos valores nos producen la siguiente gráfica:
 
+![tiempos](/images/tiempos.png)
 
-
-
+Como podemos observar, vemos que los tiempos del KNN-Secuencial y el KNN-RTree son cercanos, pero a partir de 3200 ya hay una diferencia significativa. La cercania de sus tiempos se debe a que el KNN-Rtree no se comporta bien con altas dimensiones, ocurriendo el caso en que a veces el KNN-secuencial es menor. Sin embargo, 
+vemos que el KNN-HighD supera en todo momento a los 2 métodos anteriores, presentando un tiempo de ejecución mucho menor. Esto se debe a la estructura que tiene el KDTree 
+y como ha sido implementado en dicha librería, presentado un óptimo comportamiento con altas dimensiones.

@@ -1,12 +1,19 @@
 import RtreeQuery
 import SequentialQuery
-# test knn_query
-rtree_query = RtreeQuery.RtreeQuery(100)
-print(rtree_query.knn_query('/mnt/c/proyecto3-bd2/lfw/Aaron_Eckhart/Aaron_Eckhart_0001.jpg', 5))
+import KDTree
 
-# test range_query sequentially
-sequential_query = SequentialQuery.SequentialQuery()
-print(sequential_query.range_query('/mnt/c/proyecto3-bd2/lfw/Aaron_Eckhart/Aaron_Eckhart_0001.jpg', 0.6))
+def testKNN(enc_dataset, image_query, k_values):
+    # KNN - Secuencial
+    seq_query = SequentialQuery.SequentialQuery(enc_dataset)
+    print(seq_query.knn_query(image_query, k_values))
+    
+    # KNN - RTree
+    rtree_query = RtreeQuery.RtreeQuery(enc_dataset)
+    print(rtree_query.knn_query(image_query, k_values))
+    
+    # KNN - HighD
+    kdtree_query = KDTree.KDTree(enc_dataset)
+    print(kdtree_query.knn_query(image_query, k_values))
 
-# test knn_query sequentially
-print(sequential_query.knn_query('/mnt/c/proyecto3-bd2/lfw/Aaron_Eckhart/Aaron_Eckhart_0001.jpg', 5))
+
+# testKNN('dict_encoding12800.pickle', '../lfw/Aaron_Eckhart/Aaron_Eckhart_0001.jpg', 8)
