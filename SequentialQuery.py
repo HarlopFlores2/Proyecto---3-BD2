@@ -5,8 +5,8 @@ import heapq
 import time
 
 class SequentialQuery:
-    def __init__(self):
-        self.dict_encoding = pickle.load(open('dict_encoding.pickle', 'rb'))
+    def __init__(self, encoded_dataset):
+        self.dict_encoding = pickle.load(open(encoded_dataset, 'rb'))
 
     def range_query(self, image_path, r):
         image = face_recognition.load_image_file(image_path)
@@ -23,23 +23,23 @@ class SequentialQuery:
             return []
         
     def knn_query(self, image_path, k):
-        start_time = time.time()
-
         image = face_recognition.load_image_file(image_path)
         image_encoding = face_recognition.face_encodings(image)
+
         if len(image_encoding) > 0:
             image_encoding = image_encoding[0]
-            result = []
-            for key in self.dict_encoding:
-                distance = np.linalg.norm(image_encoding - self.dict_encoding[key])
-                if len(result) < k:
-                    heapq.heappush(result, (-distance, key))
-                else:
-                    heapq.heappushpop(result, (-distance, key))
-            result = [key for _, key in sorted(result)]
         else:
-            result = []
+            raise RuntimeError("No face recognized in given image")
 
+        result = []
+        start_time = time.time()
+        for key in self.dict_encoding:
+            distance = np.linalg.norm(image_encoding - self.dict_encoding[key])
+            if len(result) < k:
+                heapq.heappush(result, (-distance, key))
+            else:
+                heapq.heappushpop(result, (-distance, key))
         execution_time = time.time() - start_time
+        result = [key for _, key in sorted(result, reverse=True)]
 
-        return result, execution_time
+        return result, execution_time*1000
