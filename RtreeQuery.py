@@ -2,6 +2,7 @@ from rtree import index
 import face_recognition
 import pickle
 import time
+import numpy as np
 
 class RtreeQuery:
     def __init__(self, encoded_dataset):
@@ -26,8 +27,9 @@ class RtreeQuery:
         
         result = []
         start_time = time.time()
-        nearest = self.index.nearest(image_encoding, k, objects=True)
+        nearest = list(self.index.nearest(image_encoding, k, objects=True))
         execution_time = time.time() - start_time
         result = [obj.object for obj in nearest]
+        distances = [np.linalg.norm(image_encoding - self.dict_encoding[obj.object]).tolist() for obj in nearest]
 
-        return result, execution_time*1000
+        return distances, result, execution_time*1000

@@ -4,7 +4,7 @@
     <title>Reconocimiento facial</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <div class="container">
@@ -22,6 +22,10 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <div id="uploaded-image-container" class="text-center mt-4">
+            <p id="image-label" style="display: none;"><b>Imagen cargada:</b></p>
+            <img id="uploaded-image" style="display: none;" />
+        </div>
         <div id="loading" class="mt-5 text-center" style="display: none;">
           <h2><span class="spinner-border spinner-border-sm"></span> Cargando...</h2>
         </div>

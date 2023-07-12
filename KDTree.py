@@ -29,4 +29,5 @@ class KDTree:
         distances, indexes = self.kdt.query(image_encoding, k)
         end = time.time()
 
+        distances = distances.tolist()
         return distances, [self.faces_files[i] for i in indexes], (end - start)*1000 

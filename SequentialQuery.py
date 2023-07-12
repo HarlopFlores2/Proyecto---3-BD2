@@ -40,6 +40,8 @@ class SequentialQuery:
             else:
                 heapq.heappushpop(result, (-distance, key))
         execution_time = time.time() - start_time
-        result = [key for _, key in sorted(result, reverse=True)]
+        result = [(np.abs(distance), key) for distance, key in sorted(result, reverse=True)]
+        distances = [np.abs(distance).tolist() for distance, _ in result]
+        result = [key for _, key in result]
 
-        return result, execution_time*1000
+        return distances, result, execution_time*1000
