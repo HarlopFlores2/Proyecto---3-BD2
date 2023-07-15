@@ -67,3 +67,7 @@ Estos valores nos producen la siguiente gráfica:
 Como podemos observar, vemos que los tiempos del KNN-Secuencial y el KNN-RTree son cercanos, pero a partir de 3200 ya hay una diferencia significativa. La cercania de sus tiempos se debe a que el KNN-Rtree no se comporta bien con altas dimensiones, ocurriendo el caso en que a veces el KNN-secuencial es menor. Sin embargo, 
 vemos que el KNN-HighD supera en todo momento a los 2 métodos anteriores, presentando un tiempo de ejecución mucho menor. Esto se debe a la estructura que tiene el KDTree 
 y como ha sido implementado en dicha librería, presentado un óptimo comportamiento con altas dimensiones.
+
+### Link al video del proyecto:
+
+https://drive.google.com/drive/folders/1jIkGAOAMQQvoDkBuf_iLKL8JDnPv0v_M?usp=sharing
