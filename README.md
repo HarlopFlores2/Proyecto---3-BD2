@@ -12,7 +12,7 @@ En la librería "Rtree", la indexación se basa en una estructura de datos conoc
 
 ### SciPy
 
-Es una librería que implementa varios algoritmos y estructuras de datos destinadas para ser usadas en actividades de computación científica. Esta librerpía logra un gran rendimiento gracias ya que implementa las partes importantes del código en lenguajes _compilados_ y les hace _wrap_ para hacer disponible estas implementaciones desde código de Python. Una de las estructuras de datos implementadas por esta librería es el Árbol kd.
+Es una librería que implementa varios algoritmos y estructuras de datos destinadas para ser usadas en actividades de computación científica. Esta librería logra un gran rendimiento gracias ya que implementa las partes importantes del código en lenguajes _compilados_ y les hace _wrap_ para hacer disponible estas implementaciones desde código de Python. Una de las estructuras de datos implementadas por esta librería es el Árbol kd.
 
 ## Implementación 
 
@@ -45,7 +45,10 @@ Para mitigar la maldición de la dimensionalidad, se pueden aplicar varias estra
 
 Es una estructura de datos utilizada para buscar y organizar conjuntos de datos multidimensionales.
 Cada nodo del árbol es un nodo de k dimensiones que divide el espacio restante a lo largo del hiperplano representado por el nodo. Los nodos a la izquierda son los menores con respecto a la dimensión de partición del nodo padre y los nodos a la derecha son los mayores. Las dimensiones a usar para el nodo de partición alternan secuencialmente y de forma repetida en las dimensiones del espacio original; un espacio con k dimensiones será particionado primero a través de la dimensión 1, luego 2, 3, …, k-1, k y luego volverá a iniciarse desde la dimensión 1.
+
 El valor usado para la dimensión de partición de un nodo es la mediana de los valores de la coordenada en la dimensión de partición de los nodos restantes. Es por esta razón que esta estructura de datos se recomienda solo si los datos ya están disponibles y no se planea añadir más información (que puede ocasionar que el árbol resulte desbalanceado, que es costoso de reparar ya que se deben considerar todas las dimensiones para no romper la invariante).
+
+El proceso de búsqueda de los K vecinos más cercanos es similar al realizado en un árbol R. Se busca el nodo hoja en donde debería insertarse el punto a buscar y se usa el elemento asociado como nuestro primer candidato a vecino más cercano. Luego subimos por los niveles del árbol revisando recursivamente los vecinos si el subespacio que representan podría tener un punto con una distancia menor a la de nuestro actual candidato.
 
 ## Experimentación
 
@@ -75,4 +78,4 @@ y como ha sido implementado en dicha librería, presentado un óptimo comportami
 
 ### Link al video del proyecto:
 
-https://drive.google.com/drive/folders/1jIkGAOAMQQvoDkBuf_iLKL8JDnPv0v_M?usp=sharing
+https://drive.google.com/drive/folders/1Vc-UwoHTpSH9SVHBI0Ax5QReTMu_LwH-?usp=sharing
